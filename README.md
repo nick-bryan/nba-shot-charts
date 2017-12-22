@@ -1,0 +1,2 @@
+## Synopsis
+These files can be used to create NBA shot charts. The shot_chart_data.py script pulls NBA shot data and player photos for 9 NBA players. The other files create the shot chart using hexagonal binning from d3.js.

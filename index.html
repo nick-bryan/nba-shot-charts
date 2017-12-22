@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>NBA Shot Charts</title>
+	<meta charset = "utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+</head>
+<body>
+	<!--Change IDs and pictures if players have been changed in Python script-->
+	<div id = "pics">
+		<div>
+			<img class = 'image-circle' id = 'LeBron James' src = './player_photos/LeBron James.png'>
+			<img class = 'image-circle' id = 'Kevin Durant' src = './player_photos/Kevin Durant.png'>
+			<img class = 'image-circle' id = 'James Harden' src = './player_photos/James Harden.png'>
+		</div>
+		<div>
+			<img class = 'image-circle' id = 'Stephen Curry' src = './player_photos/Stephen Curry.png'>
+			<img class = 'image-circle' id = 'Joel Embiid' src = './player_photos/Joel Embiid.png'>
+			<img class = 'image-circle' id = 'Giannis Antetokounmpo' src = './player_photos/Giannis Antetokounmpo.png'>
+		</div>
+		<div>
+			<img class = 'image-circle' id = 'Anthony Davis' src = './player_photos/Anthony Davis.png'>
+			<img class = 'image-circle' id = 'Kyrie Irving' src = './player_photos/Kyrie Irving.png'>
+			<img class = 'image-circle' id = 'Russell Westbrook' src = './player_photos/Russell Westbrook.png'>
+		</div>
+	</div>
+	
+	<script>
+		$(".image-circle").click(function(){
+			if($(this).is('.active')){
+				$(this).removeClass('active');
+				$('#player-shots').remove();
+			} else {
+				$(".image-circle").removeClass('active');
+				$('#player-shots').remove();
+				$(this).toggleClass('active');
+				var player = this.id;
+				d3.json("shot_chart_data/" + player + " 2017-18 shots.json",function(error,json){
+					var dataset = json;
+					render(dataset, player);
+				});
+			}
+		});
+	</script>
+	<script src = "shot_chart_d3.js"></script>
+</body>
+</html>
